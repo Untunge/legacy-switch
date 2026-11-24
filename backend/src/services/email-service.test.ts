@@ -113,9 +113,7 @@ describe('EmailService - Demo Mode Logging (Task 45)', () => {
       expect(expectedOutput).toContain('type=warning_7days');
       expect(expectedOutput).toContain('recipient=judge@demo.local');
       expect(expectedOutput).toContain("subject=7 Days: Don't Forget");
-      expect(expectedOutput).toContain(
-        'preview=Your capsule will be released'
-      );
+      expect(expectedOutput).toContain('preview=Your capsule will be released');
     });
 
     it('should include all required fields in output', () => {
@@ -146,7 +144,8 @@ describe('EmailService - Demo Mode Logging (Task 45)', () => {
     it('should log RELEASE email with correct format', () => {
       const email = {
         toEmail: 'demo-contact@demo.local',
-        subject: 'Your Legacy Capsule: Urgent: If Something Happens Has Been Released',
+        subject:
+          'Your Legacy Capsule: Urgent: If Something Happens Has Been Released',
         bodyType: 'release_notification',
         bodyData:
           'Your capsule "Urgent: If Something Happens" is now being shared. Here are your instructions...',
@@ -175,7 +174,8 @@ describe('EmailService - Demo Mode Logging (Task 45)', () => {
         toEmail: 'user@demo.local',
         subject: '3 Days Remaining: Your Legacy Check-In Needed',
         bodyType: 'warning_3days',
-        bodyData: 'Final notice: 3 days remaining before your capsule is released.',
+        bodyData:
+          'Final notice: 3 days remaining before your capsule is released.',
       };
 
       const preview = email.bodyData
@@ -318,7 +318,7 @@ describe('EmailService - Demo Mode Logging (Task 45)', () => {
     it('should handle special characters in subject', () => {
       const email = {
         toEmail: 'test@demo.local',
-        subject: "Subject with 'quotes' and \"double quotes\"",
+        subject: 'Subject with \'quotes\' and "double quotes"',
         bodyType: 'test',
         bodyData: 'Body',
       };

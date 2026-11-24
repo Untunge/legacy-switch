@@ -65,10 +65,7 @@ interface AccessConfirmationData {
  * Union type of all possible template data
  */
 export type TemplateData =
-  | Warning7DaysData
-  | Warning3DaysData
-  | ReleaseData
-  | AccessConfirmationData;
+  Warning7DaysData | Warning3DaysData | ReleaseData | AccessConfirmationData;
 
 /**
  * Result of rendering a template

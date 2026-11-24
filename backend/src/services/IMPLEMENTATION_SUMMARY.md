@@ -3,9 +3,11 @@
 ## Task 41: Email Template Engine and Notification Types
 
 ### Overview
+
 Implemented a complete email template engine (`EmailTemplateService.ts`) that generates professional, secure email notifications for all Legacy Switch scenarios. The service supports 4 email types with HTML and plain text versions, XSS protection via HTML escaping, and demo mode logging.
 
 ### Files Created
+
 - `/backend/src/services/EmailTemplateService.ts` - Main implementation (893 lines)
 - `/backend/src/services/EmailTemplateService.test.ts` - Comprehensive test suite (52 tests)
 - `/backend/src/services/EmailTemplateService.example.ts` - Usage examples and documentation
@@ -13,9 +15,11 @@ Implemented a complete email template engine (`EmailTemplateService.ts`) that ge
 ### Requirements Coverage
 
 #### Requirement 10: Email Notifications with Staged Warnings
+
 ✅ **FULLY IMPLEMENTED**
 
 The service renders:
+
 1. **WARNING_7_DAYS**: Email sent 7 days before capsule release
    - Subject: "7 Days: Don't Forget Your Legacy Check-In"
    - Calm tone with golden color scheme (#d4a574)
@@ -43,6 +47,7 @@ The service renders:
    - Confirms capsule security (cannot be accessed again)
 
 #### Requirement 23: Template Data Types
+
 ✅ **FULLY IMPLEMENTED**
 
 ```typescript
@@ -54,23 +59,33 @@ export enum EmailType {
 }
 
 // Template data interfaces for each type
-Warning7DaysData: { userName, capsuleName, daysRemaining, checkInUrl }
-Warning3DaysData: { userName, capsuleName, daysRemaining, checkInUrl }
-ReleaseData: { userName, capsuleName, contactName, releaseUrl, passphrase }
-AccessConfirmationData: { userName, capsuleName, contactName, accessedAt, contactEmail }
+Warning7DaysData: {
+  (userName, capsuleName, daysRemaining, checkInUrl);
+}
+Warning3DaysData: {
+  (userName, capsuleName, daysRemaining, checkInUrl);
+}
+ReleaseData: {
+  (userName, capsuleName, contactName, releaseUrl, passphrase);
+}
+AccessConfirmationData: {
+  (userName, capsuleName, contactName, accessedAt, contactEmail);
+}
 ```
 
 ### API
 
 #### Main Function
+
 ```typescript
 async function renderTemplate(
   type: EmailType,
   data: TemplateData
-): Promise<RenderedEmail>
+): Promise<RenderedEmail>;
 ```
 
 Returns:
+
 ```typescript
 interface RenderedEmail {
   subject: string;
@@ -82,8 +97,9 @@ interface RenderedEmail {
 ### Features
 
 #### 1. Professional Email Design
+
 - **Responsive HTML**: Mobile-friendly design with proper meta tags
-- **Color Schemes**: 
+- **Color Schemes**:
   - WARNING_7_DAYS: Gold/calming (#d4a574)
   - WARNING_3_DAYS: Orange/urgent (#e8794f)
   - RELEASE: Blue (#3b82f6)
@@ -92,19 +108,23 @@ interface RenderedEmail {
 - **Typography**: Readable font sizes, proper line heights, accessibility-focused
 
 #### 2. Security
+
 - **XSS Protection**: All user-provided data is escaped using `escapeHtml()`
 - **Safe Characters**: HTML entities (&amp;, &lt;, &gt;, &quot;, &#039;)
 - **Never Escapes URLs**: URLs remain functional in href attributes
 - **Passphrase Handling**: Shown only in release emails, never in subjects or logs
 
 #### 3. Demo Mode Support
+
 When `DEMO_MODE=true`:
+
 - Logs to console instead of queuing emails
 - Format: `[DEMO] Email Send Event: type={type}, recipient=demo-recipient, subject={subject}, preview={first 100 chars}`
 - Enables rapid testing without real email delivery
 - 1000x timer acceleration works with these logs
 
 #### 4. Accessibility
+
 - Clear typography with sufficient contrast
 - Semantic HTML structure
 - Readable font sizes (13-24px depending on context)
@@ -114,6 +134,7 @@ When `DEMO_MODE=true`:
 ### Testing
 
 #### Test Coverage: 52 Tests (100% Pass Rate)
+
 - ✅ Email type validation
 - ✅ Subject line correctness for all types
 - ✅ HTML and text version generation
@@ -137,7 +158,9 @@ When `DEMO_MODE=true`:
 ### Integration Points
 
 #### With Email Service (`email-service.ts`)
+
 The `renderTemplate()` output integrates with the email queue:
+
 ```typescript
 const templateResult = await renderTemplate(EmailType.WARNING_7_DAYS, {
   userName: 'Alice',
@@ -161,16 +184,22 @@ await db.insert(emailQueue).values({
 ```
 
 #### With Timer Service
+
 Called when timers reach warning thresholds:
+
 - T-7 days: `renderTemplate(EmailType.WARNING_7_DAYS, ...)`
 - T-3 days: `renderTemplate(EmailType.WARNING_3_DAYS, ...)`
 
 #### With Release Service
+
 Called when capsule is released:
+
 - `renderTemplate(EmailType.RELEASE, ...)`
 
 #### With Audit Service
+
 Called when contact accesses released capsule:
+
 - `renderTemplate(EmailType.ACCESS_CONFIRMATION, ...)`
 
 ### Security Considerations
@@ -199,9 +228,10 @@ Called when contact accesses released capsule:
 ### Demo Mode Example
 
 When `DEMO_MODE=true`:
+
 ```
-[DEMO] Email Send Event: type=WARNING_7_DAYS, recipient=demo-recipient, 
-subject=7 Days: Don't Forget Your Legacy Check-In, 
+[DEMO] Email Send Event: type=WARNING_7_DAYS, recipient=demo-recipient,
+subject=7 Days: Don't Forget Your Legacy Check-In,
 preview=<!DOCTYPE html><html><head>  <meta charset=UTF-8>  <meta...
 ```
 
@@ -217,6 +247,7 @@ This allows judges and developers to see email events without real SMTP.
 - Advanced SMTP configuration
 
 ### Files Modified
+
 None - this is a new service with no changes to existing files.
 
 ### Acceptance Criteria Checklist

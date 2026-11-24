@@ -95,7 +95,9 @@ describe('EmailTemplateService', () => {
     });
 
     it('should render subject line correctly', () => {
-      expect(result.subject).toEqual("7 Days: Don't Forget Your Legacy Check-In");
+      expect(result.subject).toEqual(
+        "7 Days: Don't Forget Your Legacy Check-In"
+      );
     });
 
     it('should include user name in greeting', () => {
@@ -174,7 +176,9 @@ describe('EmailTemplateService', () => {
     });
 
     it('should render urgent subject line', () => {
-      expect(result.subject).toEqual('3 Days Remaining: Your Legacy Check-In Needed');
+      expect(result.subject).toEqual(
+        '3 Days Remaining: Your Legacy Check-In Needed'
+      );
     });
 
     it('should use more urgent tone than 7-day warning', () => {
@@ -185,7 +189,7 @@ describe('EmailTemplateService', () => {
 
     it('should emphasize urgency', () => {
       expect(result.text).toContain('Time is running out');
-      expect(result.html).toContain('Don\'t Wait');
+      expect(result.html).toContain("Don't Wait");
     });
 
     it('should include warning color scheme', () => {
@@ -368,10 +372,12 @@ describe('EmailTemplateService', () => {
       expect(malResult.html).toContain('&lt;img');
       expect(malResult.html).toContain('&quot;');
       expect(malResult.html).toContain('&amp;');
-      
+
       // Verify that the actual malicious payloads are not present
       // (style tags would only appear in template itself, not in user data)
-      const userDataMatch = malResult.html.match(/<div class="greeting">Hi.*?<\/div>/s);
+      const userDataMatch = malResult.html.match(
+        /<div class="greeting">Hi.*?<\/div>/s
+      );
       if (userDataMatch) {
         // This part should not have unescaped user-provided HTML
         expect(userDataMatch[0]).toContain('Emma &lt;style&gt;');
@@ -388,7 +394,10 @@ describe('EmailTemplateService', () => {
         checkInUrl: 'https://example.com',
       };
 
-      const result7days = await renderTemplate(EmailType.WARNING_7_DAYS, data7days);
+      const result7days = await renderTemplate(
+        EmailType.WARNING_7_DAYS,
+        data7days
+      );
       expect(result7days.text).toContain('Legacy Switch');
       expect(result7days.html).toContain('Legacy Switch');
 
@@ -400,7 +409,10 @@ describe('EmailTemplateService', () => {
         passphrase: 'pass',
       };
 
-      const resultRelease = await renderTemplate(EmailType.RELEASE, dataRelease);
+      const resultRelease = await renderTemplate(
+        EmailType.RELEASE,
+        dataRelease
+      );
       expect(resultRelease.text).toContain('Legacy Switch');
       expect(resultRelease.html).toContain('Legacy Switch');
     });
@@ -486,7 +498,8 @@ describe('EmailTemplateService', () => {
     });
 
     it('should handle special characters in URLs', async () => {
-      const specialUrl = 'https://example.com/release?token=abc%20def&foo=bar&baz=qux';
+      const specialUrl =
+        'https://example.com/release?token=abc%20def&foo=bar&baz=qux';
       const data = {
         userName: 'Test',
         capsuleName: 'Test',
