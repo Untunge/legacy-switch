@@ -279,7 +279,7 @@ Legacy Switch is a full-stack web application for secure personal legacy managem
 
 ### Phase 4: Encryption, Email, Demo Mode & Contacts
 
-- [ ] 38. Implement WebCrypto wrapper utilities (PBKDF2, AES-GCM)
+- [x] 38. Implement WebCrypto wrapper utilities (PBKDF2, AES-GCM)
   - Requirement Coverage: Req 3, Req 4, Req 19, Req 30
   - Dependencies: Blocked by Task 1
   - deriveKey(passphrase, salt) returns CryptoKey for PBKDF2 (100k iterations, SHA-256)
@@ -287,48 +287,48 @@ Legacy Switch is a full-stack web application for secure personal legacy managem
   - decrypt(ciphertext, passphrase, salt, nonce) returns plaintext; throws on auth tag failure
   - Round-trip property verified
 
-- [ ] 39. Integrate encryption into capsule creation/editing
+- [-] 39. Integrate encryption into capsule creation/editing
   - Requirement Coverage: Req 2, Req 3, Req 4, Req 30
   - Dependencies: Blocked by Tasks 38 and Task 30
   - On form submit: encrypt plaintext in browser with PBKDF2+AES-GCM
   - Backend receives: ciphertext, salt, nonce, contentHash only
   - On edit: decrypt ciphertext in browser for display
 
-- [ ] 40. Integrate encryption into release link decryption
+- [-] 40. Integrate encryption into release link decryption
   - Requirement Coverage: Req 9, Req 30
   - Dependencies: Blocked by Tasks 38 and Task 32
   - Contact submits passphrase; frontend derives key using stored salt
   - Frontend retrieves ciphertext and decrypts in browser
   - Decryption success: plaintext displayed; contact marks link as used
 
-- [ ] 41. Implement email template engine and notification types
+- [x] 41. Implement email template engine and notification types
   - Requirement Coverage: Req 10, Req 23
   - Dependencies: Blocked by Task 20
   - Email templates: WARNING_7_DAYS, WARNING_3_DAYS, RELEASE, ACCESS_CONFIRMATION
   - Each template renders with dynamic data; includes clear call-to-action
   - Demo mode logs email content to console with [DEMO] prefix
 
-- [ ] 42. Implement contact-specific passphrase hashing and verification
+- [-] 42. Implement contact-specific passphrase hashing and verification
   - Requirement Coverage: Req 8, Req 29
   - Dependencies: Blocked by Tasks 19 and Task 32
   - Contact passphrase hashed with bcrypt (12+ rounds) on server
   - POST /releases/{capsuleId} accepts and verifies contact passphrase
   - Failed attempts locked for 15min after 10 failures
 
-- [ ] 43. Create demo account with pre-populated capsules
+- [x] 43. Create demo account with pre-populated capsules
   - Requirement Coverage: Req 18
   - Dependencies: Blocked by Tasks 25 and Task 13
   - On backend startup (DEMO_MODE=true): create "judge@demo.local" / "demo"
   - Pre-populate 3 capsules: ACTIVE (50%), GRACE_PERIOD (1min), RELEASED (accessed)
 
-- [ ] 44. Implement timer acceleration for demo mode (1000x)
+- [-] 44. Implement timer acceleration for demo mode (1000x)
   - Requirement Coverage: Req 18
   - Dependencies: Blocked by Task 43
   - DEMO_TIMER_MULTIPLIER=1000 controls acceleration
   - Timer calculations: nextRelease = now + (interval_seconds / multiplier)
   - Demo timers auto-transition; console logging shows each state transition
 
-- [ ] 45. Implement demo mode console logging instead of email sending
+- [x] 45. Implement demo mode console logging instead of email sending
   - Requirement Coverage: Req 18
   - Dependencies: Blocked by Task 44
   - Log to console: "[DEMO] Email Send Event" with recipient, type, subject, body preview
@@ -341,26 +341,26 @@ Legacy Switch is a full-stack web application for secure personal legacy managem
   - Email validated; passphrase validated 8+ chars
   - Contact list displays all assigned contacts with remove options
 
-- [ ] 47. Implement contact removal and access confirmation emails
+- [~] 47. Implement contact removal and access confirmation emails
   - Requirement Coverage: Req 8, Req 10
   - Dependencies: Blocked by Tasks 19 and Task 46
   - removeContact backend: delete contact and invalidate any existing tokens
   - Access confirmation email sent to original user when contact opens capsule
 
-- [ ] 48. Implement timer urgency display and candle metaphor animation
+- [~] 48. Implement timer urgency display and candle metaphor animation
   - Requirement Coverage: Req 11, Req 12
   - Dependencies: Blocked by Tasks 29 and Task 35
   - Timer component with candle metaphor visual
   - Flame height proportional to time remaining (100% → 0%)
   - Color transitions: gold (ACTIVE) → orange (GRACE_PERIOD) → extinguished (RELEASED)
 
-- [ ] 49. Implement check-in history with privacy-preserving timestamps
+- [~] 49. Implement check-in history with privacy-preserving timestamps
   - Requirement Coverage: Req 17, Req 16
   - Dependencies: Blocked by Tasks 24 and Task 29
   - Display last 5 check-ins with rounded timestamps (1-hour precision)
   - "View Full History" link shows all check-ins (paginated)
 
-- [ ] 50. Checkpoint - Encryption, email, demo, contacts fully integrated
+- [~] 50. Checkpoint - Encryption, email, demo, contacts fully integrated
   - Requirement Coverage: Req 2-10, 18
   - Dependencies: Blocked by Tasks 38-49
   - Verify capsules encrypt/decrypt correctly, email sends, demo mode works
@@ -368,135 +368,135 @@ Legacy Switch is a full-stack web application for secure personal legacy managem
 
 ### Phase 5: Security, Audit, Testing & Polish
 
-- [ ] 51. Implement input validation and sanitization middleware
+- [~] 51. Implement input validation and sanitization middleware
   - Requirement Coverage: Req 24
   - Dependencies: Blocked by Task 6
   - Email validated against RFC 5322; password requires 8+ chars; passphrase requires 8+ chars
   - File uploads: max 10MB per file, 100MB total
   - Text content sanitized to prevent XSS
 
-- [ ] 52. Implement CORS and security headers
+- [~] 52. Implement CORS and security headers
   - Requirement Coverage: Req 25
   - Dependencies: Blocked by Task 6
   - CORS allows only frontend origin
   - Security headers: HSTS (max-age=31536000), CSP, X-Frame-Options, X-Content-Type-Options
 
-- [ ] 53. Implement HTTPS redirect and TLS enforcement
+- [~] 53. Implement HTTPS redirect and TLS enforcement
   - Requirement Coverage: Req 25
   - Dependencies: Blocked by Task 6
   - HTTP requests redirected to HTTPS; HTTPS enforced in production
   - TLS 1.2 or higher configured
 
-- [ ] 54. Add logging and monitoring infrastructure
+- [~] 54. Add logging and monitoring infrastructure
   - Requirement Coverage: Req 26
   - Dependencies: Blocked by Tasks 6 and Task 21
   - All errors logged with timestamp, type, stack trace, user ID, affected resource
   - Error IDs generated and shown to user; logged server-side for correlation
   - Sensitive data never logged
 
-- [ ] 55. Implement Content Security Policy (CSP) for XSS prevention
+- [~] 55. Implement Content Security Policy (CSP) for XSS prevention
   - Requirement Coverage: Req 19, Req 25
   - Dependencies: Blocked by Task 52
   - CSP header: default-src 'self'; script-src 'self'; no inline scripts
   - Frontend build produces no inline scripts; CSP allows WebCrypto and fetch
 
-- [ ] 56. Write unit tests for encryption (PBKDF2, AES-GCM round-trip)
+- [~] 56. Write unit tests for encryption (PBKDF2, AES-GCM round-trip)
   - Requirement Coverage: Req 3, Req 4, Req 30
   - Dependencies: Blocked by Task 38
   - Test: deriveKey returns same key for same input (determinism)
   - Test: encrypt(plaintext, pw, salt) → decrypt(pw, salt) = plaintext
   - Test: different passphrases produce different keys; tampered ciphertext fails
 
-- [ ] 57. Write property-based tests for encryption round-trip
+- [~] 57. Write property-based tests for encryption round-trip
   - Requirement Coverage: Req 3, Req 4
   - Dependencies: Blocked by Task 38
   - Property: FOR ALL plaintext, passphrase ∈ String, encrypt(p, pw, s) → decrypt(pw, s) = p
   - Use fast-check; generate 100+ examples; all pass
 
-- [ ] 58. Write tests for timer state machine
+- [~] 58. Write tests for timer state machine
   - Requirement Coverage: Req 5, Req 6, Req 7
   - Dependencies: Blocked by Task 14
   - Test state transitions: ACTIVE → GRACE_PERIOD → RELEASED
   - Test check-in resets timer; grace period expiration irreversible
 
-- [ ] 59. Write tests for audit log hash chain
+- [~] 59. Write tests for audit log hash chain
   - Requirement Coverage: Req 13, Req 14, Req 15
   - Dependencies: Blocked by Task 21
   - Test hash chain links correctly, tampering detected
   - Test: modify entry → hash chain invalid; insert entry → sequence breaks
 
-- [ ] 60. Write integration tests for complete auth and capsule flow
+- [~] 60. Write integration tests for complete auth and capsule flow
   - Requirement Coverage: Req 1-15, 23, 27, 30
   - Dependencies: Blocked by Tasks 25 and Task 50
   - Test: register, login, create capsule, check-in, timer expiration, release, contact access
 
-- [ ] 61. Write tests for release link token validation
+- [~] 61. Write tests for release link token validation
   - Requirement Coverage: Req 9, Req 28
   - Dependencies: Blocked by Tasks 17 and Task 18
   - Test token generation, hashing, one-time-use, constant-time comparison
 
-- [ ] 62. Performance optimization and stress testing
+- [~] 62. Performance optimization and stress testing
   - Requirement Coverage: General performance
   - Dependencies: Blocked by Tasks 25 and Task 60
   - Optimize database queries, implement caching
   - Stress testing: 1000+ concurrent users; timer checker 10k capsules < 1 min
 
-- [ ] 63. Implement rate limiting enforcement and testing
+- [~] 63. Implement rate limiting enforcement and testing
   - Requirement Coverage: Req 1, Req 29
   - Dependencies: Blocked by Task 22
   - Verify rate limits on login, email, token verification
   - Requests exceeding limit return 429 with Retry-After header
 
-- [ ] 64. Write documentation for deployment and operations
+- [~] 64. Write documentation for deployment and operations
   - Requirement Coverage: General infrastructure
   - Dependencies: Blocked by Tasks 25 and Task 50
   - Deployment guide, runbook for backups/recovery, troubleshooting guide
   - Operations checklist for pre-production, go-live, post-deployment
 
-- [ ] 65. Configure production deployment (Vercel frontend, Fly.io backend)
+- [~] 65. Configure production deployment (Vercel frontend, Fly.io backend)
   - Requirement Coverage: General infrastructure, Req 25
   - Dependencies: Blocked by Tasks 25 and Task 50
   - Frontend builds on Vercel; backend deploys to Fly.io
   - Managed PostgreSQL with automated backups
   - CI/CD pipeline (GitHub Actions)
 
-- [ ] 66. Implement graceful error recovery and retry logic
+- [~] 66. Implement graceful error recovery and retry logic
   - Requirement Coverage: Req 26, Req 23
   - Dependencies: Blocked by Tasks 20 and Task 54
   - Email retries: 1min, 5min, 15min backoff; max 3 retries
   - Network failures trigger retry; UI shows helpful next steps
 
-- [ ] 67. Final checkpoint - All implementation complete
+- [~] 67. Final checkpoint - All implementation complete
   - Requirement Coverage: Req 1-30
   - Dependencies: Blocked by Tasks 61-66
   - Verify all 72 tasks complete, integrated, tested
   - Full end-to-end flow tested; all tests passing
 
-- [ ] 68. Create user-facing documentation and help pages
+- [~] 68. Create user-facing documentation and help pages
   - Requirement Coverage: General polish
   - Dependencies: Blocked by Task 65
   - Quick-start guide, FAQ, security FAQ
   - Help pages linked from app navigation; clear non-technical language
 
-- [ ] 69. Implement analytics and monitoring (optional for MVP)
+- [~] 69. Implement analytics and monitoring (optional for MVP)
   - Requirement Coverage: General polish
   - Dependencies: Blocked by Tasks 54 and Task 65
   - Track: user signup, capsule creation, timer expiration, release, contact access
   - Dashboard shows: DAU, capsule creation rate, release rate, error rate
 
-- [ ] 70. Create accessibility improvements (a11y)
+- [~] 70. Create accessibility improvements (a11y)
   - Requirement Coverage: General polish
   - Dependencies: Blocked by Task 37
   - Form inputs with ARIA labels; keyboard navigation (Tab, Enter, Escape)
   - Color contrast ratios WCAG AA (4.5:1); focus indicators visible
 
-- [ ] 71. Performance profiling and optimization (Phase 2 priority)
+- [~] 71. Performance profiling and optimization (Phase 2 priority)
   - Requirement Coverage: General polish
   - Dependencies: Blocked by Task 65
   - Frontend bundle < 2MB gzipped
   - PBKDF2 derivation < 500ms; database queries < 100ms
 
-- [ ] 72. Final manual testing and quality assurance
+- [~] 72. Final manual testing and quality assurance
   - Requirement Coverage: Req 1-30
   - Dependencies: Blocked by Tasks 61-71
   - Comprehensive manual testing of all features, edge cases, error scenarios

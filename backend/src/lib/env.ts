@@ -14,6 +14,7 @@ export const env = {
   REFRESH_TOKEN_EXPIRY: process.env.REFRESH_TOKEN_EXPIRY || '7d',
   RESEND_API_KEY: process.env.RESEND_API_KEY,
   DEMO_MODE: process.env.DEMO_MODE === 'true',
+  DEMO_TIMER_MULTIPLIER: process.env.DEMO_TIMER_MULTIPLIER || '1000',
   NODE_ENV: (process.env.NODE_ENV || 'development') as
     'development' | 'production',
   PORT: parseInt(process.env.PORT || '3000', 10),

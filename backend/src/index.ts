@@ -9,6 +9,7 @@ import logger from './lib/logger';
 import { errorHandler } from './middleware/error-handler';
 import { runTimerJobs } from './services/timer-service';
 import { runEmailJobs } from './services/email-service';
+import { initializeDemoAccount } from './services/demo-account-service';
 import authRoutes from './routes/auth';
 import capsuleRoutes from './routes/capsules';
 import checkinRoutes from './routes/checkin';
@@ -17,6 +18,14 @@ import releaseRoutes from './routes/releases';
 
 // Validate environment variables
 validateEnv();
+
+// Initialize demo account if DEMO_MODE is enabled
+if (env.DEMO_MODE) {
+  initializeDemoAccount().catch((err) => {
+    logger.error(err, 'Failed to initialize demo account');
+    process.exit(1);
+  });
+}
 
 const app = new Hono();
 

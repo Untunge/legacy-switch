@@ -7,7 +7,22 @@ import logger from '../lib/logger';
 /**
  * Email service
  * Design.md: Transactional email, retry with backoff, Resend API or console
+ * Task 45: Demo mode console logging instead of email sending
  */
+
+/**
+ * Extract preview from HTML body: strip HTML tags, limit to 100 characters
+ * @param body HTML string
+ * @returns First 100 characters with HTML stripped and normalized
+ */
+function extractPreview(body: string): string {
+  // Strip HTML tags
+  const stripped = body.replace(/<[^>]*>/g, ' ');
+  // Normalize whitespace (multiple spaces to single)
+  const normalized = stripped.replace(/\s+/g, ' ').trim();
+  // Return first 100 characters
+  return normalized.slice(0, 100);
+}
 
 /**
  * Task 20: Send queued emails
@@ -72,18 +87,19 @@ export async function processEmailQueue(): Promise<void> {
 
 /**
  * Send a single email via Resend or console (demo)
+ * Task 45: When DEMO_MODE=true, log to console instead of sending
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function sendEmail(email: any): Promise<void> {
   if (env.DEMO_MODE) {
-    // Console logging in demo mode
-    logger.info(
-      {
-        to: email.toEmail,
-        subject: email.subject,
-        body: email.bodyData,
-      },
-      '[DEMO] Email would be sent'
+    // Task 45: Console logging in demo mode with [DEMO] prefix
+    const preview = extractPreview(
+      typeof email.bodyData === 'string'
+        ? email.bodyData
+        : JSON.stringify(email.bodyData)
+    );
+    console.log(
+      `[DEMO] Email Send Event: type=${email.bodyType}, recipient=${email.toEmail}, subject=${email.subject}, preview=${preview}`
     );
     return;
   }
