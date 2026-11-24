@@ -69,12 +69,7 @@ describe('WebCrypto utilities', () => {
 
     // Try to decrypt tampered data
     await expect(
-      decrypt(
-        tamperedCiphertext,
-        passphrase,
-        encrypted.salt,
-        encrypted.nonce
-      )
+      decrypt(tamperedCiphertext, passphrase, encrypted.salt, encrypted.nonce)
     ).rejects.toThrow('Decryption failed');
   });
 

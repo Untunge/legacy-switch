@@ -89,7 +89,9 @@ const ReleasePreviewPage: React.FC = () => {
     return (
       <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
         <div className="bg-red-950 border border-red-700 rounded-lg p-6 max-w-md">
-          <h2 className="text-xl font-bold text-red-200 mb-2">Invalid Release Link</h2>
+          <h2 className="text-xl font-bold text-red-200 mb-2">
+            Invalid Release Link
+          </h2>
           <p className="text-gray-300">No token or capsule provided in URL.</p>
         </div>
       </div>
@@ -109,7 +111,9 @@ const ReleasePreviewPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
       <div className="bg-gray-800 border border-purple-800 rounded-lg p-8 max-w-md w-full">
-        <h1 className="text-2xl font-bold text-purple-300 mb-2">{preview.title}</h1>
+        <h1 className="text-2xl font-bold text-purple-300 mb-2">
+          {preview.title}
+        </h1>
         {preview.description && (
           <p className="text-gray-400 mb-6">{preview.description}</p>
         )}
@@ -140,7 +144,9 @@ const ReleasePreviewPage: React.FC = () => {
           </form>
         ) : (
           <div className="bg-green-950 border border-green-700 rounded p-4">
-            <h2 className="font-semibold text-green-200 mb-3">✓ Content Unlocked</h2>
+            <h2 className="font-semibold text-green-200 mb-3">
+              ✓ Content Unlocked
+            </h2>
             <div className="bg-gray-700 rounded p-4 max-h-64 overflow-y-auto">
               <p className="text-gray-100 whitespace-pre-wrap">{plaintext}</p>
             </div>

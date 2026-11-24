@@ -132,9 +132,7 @@ export async function decrypt(
     const dec = new TextDecoder();
     return dec.decode(plainBytes);
   } catch (error) {
-    throw new Error(
-      'Decryption failed. Wrong passphrase or corrupted data.'
-    );
+    throw new Error('Decryption failed. Wrong passphrase or corrupted data.');
   }
 }
 

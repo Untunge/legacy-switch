@@ -109,9 +109,14 @@ const CapsuleFormPage: React.FC<CapsuleFormPageProps> = ({ mode }) => {
         {mode === 'create' ? 'Create Capsule' : 'Edit Capsule'}
       </h1>
 
-      <form onSubmit={handleSubmit} className="bg-gray-800 border border-gray-700 rounded-lg p-6 space-y-4">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-gray-800 border border-gray-700 rounded-lg p-6 space-y-4"
+      >
         <div>
-          <label className="block text-sm font-medium text-gray-300 mb-2">Title</label>
+          <label className="block text-sm font-medium text-gray-300 mb-2">
+            Title
+          </label>
           <input
             type="text"
             value={title}
@@ -122,7 +127,9 @@ const CapsuleFormPage: React.FC<CapsuleFormPageProps> = ({ mode }) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-300 mb-2">Description</label>
+          <label className="block text-sm font-medium text-gray-300 mb-2">
+            Description
+          </label>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -156,7 +163,9 @@ const CapsuleFormPage: React.FC<CapsuleFormPageProps> = ({ mode }) => {
         )}
 
         <div>
-          <label className="block text-sm font-medium text-gray-300 mb-2">Content</label>
+          <label className="block text-sm font-medium text-gray-300 mb-2">
+            Content
+          </label>
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
@@ -166,7 +175,9 @@ const CapsuleFormPage: React.FC<CapsuleFormPageProps> = ({ mode }) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-300 mb-2">Passphrase</label>
+          <label className="block text-sm font-medium text-gray-300 mb-2">
+            Passphrase
+          </label>
           <input
             type="password"
             value={passphrase}
@@ -175,11 +186,15 @@ const CapsuleFormPage: React.FC<CapsuleFormPageProps> = ({ mode }) => {
             minLength={8}
             className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded focus:border-purple-500 outline-none text-gray-100"
           />
-          <p className="text-xs text-gray-400 mt-1">At least 8 characters. Used for encryption, never sent to server.</p>
+          <p className="text-xs text-gray-400 mt-1">
+            At least 8 characters. Used for encryption, never sent to server.
+          </p>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-300 mb-2">Confirm Passphrase</label>
+          <label className="block text-sm font-medium text-gray-300 mb-2">
+            Confirm Passphrase
+          </label>
           <input
             type="password"
             value={passphraseConfirm}
@@ -190,7 +205,9 @@ const CapsuleFormPage: React.FC<CapsuleFormPageProps> = ({ mode }) => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-300 mb-2">Check-in Interval</label>
+          <label className="block text-sm font-medium text-gray-300 mb-2">
+            Check-in Interval
+          </label>
           <select
             value={interval}
             onChange={(e) => setInterval(e.target.value as any)}
