@@ -1,0 +1,9 @@
+dist
+node_modules
+.vscode
+.prettierrc.json
+.eslintrc.json
+tailwind.config.js
+vite.config.ts
+postcss.config.js
+index.html

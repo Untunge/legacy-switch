@@ -1,0 +1,7 @@
+dist
+node_modules
+.vscode
+.git
+*.config.js
+*.config.ts
+index.html

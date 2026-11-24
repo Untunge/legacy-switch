@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+package-lock.json
+npm-debug.log*
+
+# Build output
+dist/
+build/
+.next/
+out/
+
+# Environment
+.env
+.env.local
+.env.*.local
+.env.production.local
+
+# Database
+*.db
+*.db-journal
+legacy.db
+legacy.db-journal
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Testing
+coverage/
+.nyc_output/
+*.lcov
+
+# Logs
+logs/
+*.log
+
+# Misc
+.turbo/
+dist

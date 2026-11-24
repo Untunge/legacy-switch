@@ -27,50 +27,50 @@ Legacy Switch is a full-stack web application for secure personal legacy managem
 
 ### Phase 1: Infrastructure & Database Setup
 
-- [ ] 1. Set up project directory structure and build configuration
+- [x] 1. Set up project directory structure and build configuration
   - Requirement Coverage: General infrastructure
   - Dependencies: None
   - Create monorepo with frontend (Vite + React 18 + TypeScript + Tailwind) and backend (Node.js + Hono + TypeScript)
   - Root package.json with workspace scripts for simultaneous dev/build
   - Both frontend and backend pass linting
 
-- [ ] 2. Set up SQLite database for local development and PostgreSQL schema
+- [x] 2. Set up SQLite database for local development and PostgreSQL schema
   - Requirement Coverage: General infrastructure, Req 27
   - Dependencies: Blocked by Task 1
   - Configure Drizzle ORM with SQLite (dev) and PostgreSQL (prod)
   - Set up database connection pooling and migration system
 
-- [ ] 3. Define and generate Drizzle ORM database schema
+- [x] 3. Define and generate Drizzle ORM database schema
   - Requirement Coverage: Req 27
   - Dependencies: Blocked by Task 2
   - Create all 8 table schemas with relationships, indexes, and constraints
   - Generate TypeScript types from schema; verify compilation
 
-- [ ] 4. Create database migration for initial schema
+- [x] 4. Create database migration for initial schema
   - Requirement Coverage: Req 27
   - Dependencies: Blocked by Task 3
   - Generate migration SQL for all 8 tables
   - Test migration on both SQLite and PostgreSQL
 
-- [ ] 5. Set up environment variables and secrets management
+- [x] 5. Set up environment variables and secrets management
   - Requirement Coverage: General infrastructure, Req 25, Req 23
   - Dependencies: Blocked by Task 2
   - Create .env.local.example with all required env vars
   - Configure dotenv loading; ensure secrets not logged
 
-- [ ] 6. Set up API error handling and middleware stack
+- [x] 6. Set up API error handling and middleware stack
   - Requirement Coverage: Req 26, Req 24
   - Dependencies: Blocked by Task 1
   - Create centralized error handling middleware with standard error response format
   - Implement CORS, request logging, error ID generation
 
-- [ ] 7. Set up TypeScript types and shared interfaces
+- [x] 7. Set up TypeScript types and shared interfaces
   - Requirement Coverage: General infrastructure
   - Dependencies: Blocked by Task 3
   - Define all TypeScript interfaces and Zod validation schemas
   - Export types from /backend/src/types/index.ts
 
-- [ ] 8. Checkpoint - Verify all infrastructure is correctly set up
+- [x] 8. Checkpoint - Verify all infrastructure is correctly set up
   - Requirement Coverage: General infrastructure
   - Dependencies: Blocked by Tasks 1-7
   - Verify TypeScript compilation, database connection, middleware loading
