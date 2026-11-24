@@ -193,35 +193,35 @@ Legacy Switch is a full-stack web application for secure personal legacy managem
 
 ### Phase 3: Frontend Core - Pages & Components
 
-- [ ] 26. Set up React Router and app layout
+- [x] 26. Set up React Router and app layout
   - Requirement Coverage: General frontend infrastructure
   - Dependencies: Blocked by Task 1
   - Configure TanStack React Router with routes: /login, /dashboard, /capsule/new, /capsule/:id, /releases/:id, /audit/:id
   - Protected routes redirect unauthenticated users to /login
   - Navigation bar with user email and logout button
 
-- [ ] 27. Create authentication context and login page
+- [x] 27. Create authentication context and login page
   - Requirement Coverage: Req 1, Req 22
   - Dependencies: Blocked by Tasks 26 and Task 9
   - AuthContext with useAuth hook for user state management
   - LoginPage with email/password form; calls POST /auth/login
   - On success, JWT stored; user redirected to dashboard
 
-- [ ] 28. Create user registration page
+- [x] 28. Create user registration page
   - Requirement Coverage: Req 1
   - Dependencies: Blocked by Task 27
   - RegisterPage with email, password, password confirm fields
   - Client-side validation; calls POST /auth/signup
   - On success, user logged in and redirected to dashboard
 
-- [ ] 29. Create Dashboard page with capsule list and timer display
+- [x] 29. Create Dashboard page with capsule list and timer display
   - Requirement Coverage: Req 11, Req 12, Req 16
   - Dependencies: Blocked by Tasks 27 and Task 25
   - Dashboard queries GET /capsules; displays all user's capsules sorted by urgency
   - Each capsule shows: title, interval, time remaining, timer state badge
   - "Check In" button; action buttons: View, Edit, Delete
 
-- [ ] 30. Create Capsule form page for creating/editing capsules
+- [x] 30. Create Capsule form page for creating/editing capsules
   - Requirement Coverage: Req 2, Req 6, Req 8
   - Dependencies: Blocked by Task 29
   - Form supports create (blank) and edit (pre-filled) modes
@@ -229,28 +229,28 @@ Legacy Switch is a full-stack web application for secure personal legacy managem
   - Passphrase validated (8+ chars) but never sent to server
   - File upload: max 10MB per file, 100MB total
 
-- [ ] 31. Create Capsule detail page
+- [x] 31. Create Capsule detail page
   - Requirement Coverage: Req 16, Req 8
   - Dependencies: Blocked by Tasks 25 and Task 29
   - Displays capsule metadata, timer state, check-in history (last 5)
   - Contact list with status (pending/released/accessed)
   - "Add Contact", "Remove Contact" buttons; "View Full History" link
 
-- [ ] 32. Create Release Preview page (contact access)
+- [x] 32. Create Release Preview page (contact access)
   - Requirement Coverage: Req 9, Req 20
   - Dependencies: Blocked by Tasks 25 and Task 17
   - Accessed via Release Link with token in URL
   - Displays capsule title and "Enter your passphrase" prompt
   - Submits token hash and passphrase; retrieves ciphertext and decrypts client-side
 
-- [ ] 33. Create Audit Log page for viewing and verifying hash chain
+- [x] 33. Create Audit Log page for viewing and verifying hash chain
   - Requirement Coverage: Req 13, Req 14
   - Dependencies: Blocked by Tasks 24 and Task 29
   - Displays capsule access history with tamper-evident hash chain verification
   - "Verify Hash Chain" button runs client-side verification
   - Verification result shown: "✓ Hash chain valid" or "✗ Tampering detected"
 
-- [ ] 34. Create React hooks for API calls (useCapsules, useCheckIn, useContacts)
+- [x] 34. Create React hooks for API calls (useCapsules, useCheckIn, useContacts)
   - Requirement Coverage: Req 2, Req 5, Req 8
   - Dependencies: Blocked by Tasks 25 and Task 27
   - useCapsules: { capsules, loading, createCapsule, updateCapsule, deleteCapsule }
@@ -258,20 +258,20 @@ Legacy Switch is a full-stack web application for secure personal legacy managem
   - useContacts: { contacts, addContact, removeContact }
   - Use TanStack React Query for caching/refetching
 
-- [ ] 35. Create theme context and Tailwind styling setup
+- [x] 35. Create theme context and Tailwind styling setup
   - Requirement Coverage: General frontend
   - Dependencies: Blocked by Task 1
   - Tailwind configured with custom theme colors
   - Candle metaphor animations defined (flame flickering, color transitions)
   - Dark mode support; responsive design for mobile/tablet/desktop
 
-- [ ] 36. Create error boundary component and error handling UI
+- [x] 36. Create error boundary component and error handling UI
   - Requirement Coverage: Req 26
   - Dependencies: Blocked by Task 26
   - ErrorBoundary catches React errors; displays user-friendly message with error ID
   - "Try again" button; error logged server-side
 
-- [ ] 37. Checkpoint - Frontend pages and components complete
+- [x] 37. Checkpoint - Frontend pages and components complete
   - Requirement Coverage: Req 1, 2, 5, 6, 8, 11, 12, 13, 14, 16, 22
   - Dependencies: Blocked by Tasks 26-36
   - Verify routing works, login/register functional, dashboard displays capsules
