@@ -8,37 +8,39 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "db:push": "drizzle-kit push:sqlite",
-    "db:migrate": "drizzle-kit migrate:sqlite",
+    "db:migrate": "drizzle-kit push:sqlite",
     "db:studio": "drizzle-kit studio",
     "lint": "eslint . --ext .ts && prettier --check .",
     "type-check": "tsc --noEmit",
     "test": "vitest --run"
   },
   "dependencies": {
-    "hono": "^3.11.0",
-    "drizzle-orm": "^0.28.0",
+    "@hono/node-server": "^2.1.11",
     "@libsql/client": "^0.3.0",
-    "pg": "^8.11.0",
     "bcryptjs": "^2.4.3",
+    "dotenv": "^16.3.0",
+    "drizzle-orm": "^0.28.0",
+    "hono": "^3.11.0",
     "jsonwebtoken": "^9.0.2",
-    "zod": "^3.22.0",
+    "node-cron": "^3.0.0",
+    "pg": "^8.11.0",
     "pino": "^8.17.0",
     "pino-pretty": "^10.2.0",
-    "dotenv": "^16.3.0",
-    "node-cron": "^3.0.0"
+    "zod": "^3.22.0"
   },
   "devDependencies": {
-    "@types/node": "^20.0.0",
     "@types/bcryptjs": "^2.4.2",
     "@types/jsonwebtoken": "^9.0.0",
-    "typescript": "^5.3.0",
-    "tsx": "^4.7.0",
+    "@types/node": "^20.0.0",
+    "@types/node-cron": "^3.0.11",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
     "drizzle-kit": "^0.20.0",
     "eslint": "^8.54.0",
     "eslint-config-prettier": "^9.1.0",
     "prettier": "^3.1.0",
-    "vitest": "^0.34.0",
-    "@typescript-eslint/eslint-plugin": "^6.13.0",
-    "@typescript-eslint/parser": "^6.13.0"
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.0",
+    "vitest": "^0.34.0"
   }
 }

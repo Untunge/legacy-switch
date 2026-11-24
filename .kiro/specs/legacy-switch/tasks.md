@@ -78,114 +78,114 @@ Legacy Switch is a full-stack web application for secure personal legacy managem
 
 ### Phase 2: Backend Core - Authentication & Services
 
-- [ ] 9. Implement user registration (signup) endpoint
+- [x] 9. Implement user registration (signup) endpoint
   - Requirement Coverage: Req 1
   - Dependencies: Blocked by Task 8
   - POST /auth/signup validates email/password, hashes with bcrypt (12+ rounds)
   - Create user account, return JWT token (24-hour expiry), log signup in Audit Log
 
-- [ ] 10. Implement user login endpoint
+- [x] 10. Implement user login endpoint
   - Requirement Coverage: Req 1
   - Dependencies: Blocked by Task 9
   - POST /auth/login authenticates by email/password with constant-time comparison
   - Rate limiting: max 5 attempts/min per IP; generic error message for invalid credentials
 
-- [ ] 11. Implement JWT token generation and validation
+- [x] 11. Implement JWT token generation and validation
   - Requirement Coverage: Req 1, Req 22
   - Dependencies: Blocked by Task 9
   - JWT generated with payload {userId, email} and 24-hour expiry
   - Token stored in httpOnly cookie; validation middleware checks signature and expiry
   - Session timeout: 30min inactivity, 24-hour max; logout clears cookie
 
-- [ ] 12. Implement password reset workflow
+- [x] 12. Implement password reset workflow
   - Requirement Coverage: Req 1
   - Dependencies: Blocked by Task 9
   - Request endpoint generates 1-hour token; confirmation endpoint validates and updates password
   - Token hashed before storage; invalidated after use
   - Generic response to prevent email enumeration
 
-- [ ] 13. Create Capsule model and CRUD service
+- [x] 13. Create Capsule model and CRUD service
   - Requirement Coverage: Req 2, Req 30
   - Dependencies: Blocked by Task 8
   - CapsuleService with create, read, update, delete methods
   - Store encrypted content, salt, nonce, contentHash; verify ownership
   - Reject updates after release
 
-- [ ] 14. Implement Timer service with state machine
+- [x] 14. Implement Timer service with state machine
   - Requirement Coverage: Req 5, Req 6, Req 7
   - Dependencies: Blocked by Task 13
   - Timer states: ACTIVE → GRACE_PERIOD → RELEASED (irreversible)
   - Check-in updates lastCheckin, resets nextRelease
   - Interval configuration: DAILY, WEEKLY, MONTHLY
 
-- [ ] 15. Implement background job for timer expiration checking
+- [x] 15. Implement background job for timer expiration checking
   - Requirement Coverage: Req 5, Req 7, Req 10
   - Dependencies: Blocked by Task 14
   - Background job runs every 60s; scans for ACTIVE timers past nextRelease
   - Transitions to GRACE_PERIOD, sets graceEndsAt=NOW+7days
   - Sends 7-day and 3-day warning emails
 
-- [ ] 16. Implement grace period expiration and capsule release
+- [x] 16. Implement grace period expiration and capsule release
   - Requirement Coverage: Req 7, Req 9
   - Dependencies: Blocked by Task 15
   - Background job for GRACE_PERIOD timers past graceEndsAt
   - Generates 32-byte token per contact, hashes and stores tokenHash
   - Sends release notification emails to all contacts
 
-- [ ] 17. Implement Release Link validation and capsule preview
+- [x] 17. Implement Release Link validation and capsule preview
   - Requirement Coverage: Req 9, Req 28
   - Dependencies: Blocked by Task 16
   - GET /releases/{capsuleId}?token={token} validates token via constant-time comparison
   - Returns capsule metadata (title, description, encryptedContent, salt, nonce)
   - Rate limit: 10 token verification attempts per IP per second
 
-- [ ] 18. Implement Release Link confirm endpoint (mark token as used)
+- [x] 18. Implement Release Link confirm endpoint (mark token as used)
   - Requirement Coverage: Req 9, Req 28
   - Dependencies: Blocked by Task 17
   - POST /releases/{capsuleId}/confirm marks tokenHash as used
   - Updates contacts.accessed=TRUE, accessedAt=NOW
   - Logs access event in Audit Log
 
-- [ ] 19. Implement Contact management service
+- [x] 19. Implement Contact management service
   - Requirement Coverage: Req 8, Req 29
   - Dependencies: Blocked by Task 13
   - ContactService for add, remove, list contacts per capsule
   - Store email, name, bcrypt hash of passphrase (12+ rounds)
   - Prevent duplicate contacts
 
-- [ ] 20. Implement email queuing service
+- [x] 20. Implement email queuing service
   - Requirement Coverage: Req 10, Req 23
   - Dependencies: Blocked by Task 8
   - EmailService with queue-based sending, retry logic (exponential backoff)
   - Background job every 5 minutes; sends via Resend API or logs in demo mode
   - Failed sends retry: 1min, 5min, 15min; max 3 retries
 
-- [ ] 21. Implement Audit service with tamper-evident hash chain
+- [x] 21. Implement Audit service with tamper-evident hash chain
   - Requirement Coverage: Req 13, Req 14, Req 15
   - Dependencies: Blocked by Task 8
   - AuditService for append-only audit logging with SHA-256 hash chain
   - Each entry: hash = SHA256(prevHash || entryData || seqNum)
   - Prevent modifications/deletes; getAuditTrail returns entries with hashes
 
-- [ ] 22. Implement rate limiting middleware for sensitive endpoints
+- [x] 22. Implement rate limiting middleware for sensitive endpoints
   - Requirement Coverage: Req 1, Req 29
   - Dependencies: Blocked by Task 6
   - Token bucket rate limiting per IP: login 5/min, email 10/min, API 100/min, token verify 10/sec
   - Excess requests return 429 with retry-after header
 
-- [ ] 23. Implement GET /auth/session endpoint for session restoration
+- [x] 23. Implement GET /auth/session endpoint for session restoration
   - Requirement Coverage: Req 22
   - Dependencies: Blocked by Task 11
   - Returns {userId, email, createdAt} if JWT valid
   - Used by frontend on page load to restore session
 
-- [ ] 24. Implement GET /capsules/{id}/audit endpoint for audit trail retrieval
+- [x] 24. Implement GET /capsules/{id}/audit endpoint for audit trail retrieval
   - Requirement Coverage: Req 13, Req 14
   - Dependencies: Blocked by Task 21
   - Returns audit entries for capsule sorted by timestamp DESC
   - Verify ownership; include hash and prevHash fields for chain verification
 
-- [ ] 25. Checkpoint - Backend services complete and testable
+- [x] 25. Checkpoint - Backend services complete and testable
   - Requirement Coverage: Req 1-15, 23, 27, 28, 29
   - Dependencies: Blocked by Tasks 9-24
   - Verify auth flow works end-to-end, capsule CRUD functional
